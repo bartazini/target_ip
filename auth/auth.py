@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, ".env.sample"))
+load_dotenv(os.path.join(BASE_DIR, "env_file"))
 
 
 class AuthHandler:
