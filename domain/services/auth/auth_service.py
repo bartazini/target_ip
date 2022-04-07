@@ -5,10 +5,9 @@ from core.schemas import AuthDetails
 from auth.auth import AuthHandler
 
 
-auth_handler = AuthHandler()
-
-
 async def login(auth_details: AuthDetails):
+    auth_handler = AuthHandler()
+
     hardcoded_username = "admin"
     hardcoded_password = "admin"
 
