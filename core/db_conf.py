@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, ".env.sample"))
 
 SQLALCHEMY_DATABASE_URL = os.environ["DATABASE_URL"]
 

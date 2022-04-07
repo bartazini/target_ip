@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: alembic upgrade head && uvicorn main:app --port 80 --reload

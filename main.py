@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from fastapi import FastAPI, Depends
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 import core.schemas as schemas
 from auth.auth import AuthHandler
@@ -11,6 +12,21 @@ import domain.services.ip_crud.ip_crud_service as ip_crud_service
 from core.db_conf import get_db
 
 app = FastAPI()
+
+
+origins = [
+    "https://target-ip.herokuapp.com/",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+
 auth_handler = AuthHandler()
 
 
