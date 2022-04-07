@@ -14,6 +14,11 @@ app = FastAPI()
 auth_handler = AuthHandler()
 
 
+@app.get("/")
+async def home():
+    return {"message": "Hello World!"}
+
+
 @app.post("/login")
 async def login(auth_details: schemas.AuthDetails):
     return await auth_service.login(auth_details=auth_details)
