@@ -1,3 +1,5 @@
+import json
+
 from sqlalchemy.orm import Session
 
 from fastapi.responses import JSONResponse
@@ -6,7 +8,19 @@ from core.models import Address
 from ip_stack.IpStack import IpStack
 
 
-async def get_ip_location(ip_address: str) -> JSONResponse:
+async def get_ip_location(ip_address: str, db: Session) -> JSONResponse:
+    try:
+        db_address = db.query(Address).filter(Address.address == ip_address).first()
+
+    except Exception as e:
+        return JSONResponse(
+            content={"status": f"Critical database issue: {e.__class__.__name__}"}, status_code=500
+        )
+
+    if db_address:
+        content = json.loads(db_address.geo_location_details)
+        return JSONResponse(content=content, status_code=200)
+
     try:
         ip_address_location_details = await _get_ip_address_geolocation_details(ip_address=ip_address)
 
@@ -41,7 +55,7 @@ async def add_ip_location(ip_address: str, db: Session) -> JSONResponse:
     try:
         db_url = Address(
             address=ip_address,
-            geo_location_details=str(ip_address_location_details)
+            geo_location_details=json.dumps(ip_address_location_details)
         )
         db.add(db_url)
         db.commit()

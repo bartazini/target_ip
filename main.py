@@ -20,8 +20,8 @@ async def login(auth_details: schemas.AuthDetails):
 
 
 @app.get("/get_ip_location/{ip_address}", dependencies=[Depends(auth_handler.auth_wrapper)])
-async def get_ip_location(ip_address: str) -> JSONResponse:
-    return await ip_crud_service.get_ip_location(ip_address=ip_address)
+async def get_ip_location(ip_address: str, db: Session = Depends(get_db)) -> JSONResponse:
+    return await ip_crud_service.get_ip_location(ip_address=ip_address, db=db)
 
 
 @app.post("/add_ip_location", dependencies=[Depends(auth_handler.auth_wrapper)])
