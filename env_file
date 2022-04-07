@@ -5,7 +5,7 @@ API_ACCESS_KEY=11b99a9b1c0a3b3ac981cca0b896697f
 DB_USER=vhwtnimscqbqci
 DB_PASSWORD=3f9a6e1af0f0ae58eb877437f82f3df979283dfb5efef9b3682befaaa6e56b2d
 DB_NAME=dcqonc05kkk4bo
-DATABASE_URL=postgres://vhwtnimscqbqci:3f9a6e1af0f0ae58eb877437f82f3df979283dfb5efef9b3682befaaa6e56b2d@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/dcqonc05kkk4bo
+DATABASE_URL=postgresql://vhwtnimscqbqci:3f9a6e1af0f0ae58eb877437f82f3df979283dfb5efef9b3682befaaa6e56b2d@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/dcqonc05kkk4bo
 
 SECRET_KEY=ezz=(f)b2u72(yju3yqp1v%izzo3uz-^l#l()tta^m_@h@u(qb
 
