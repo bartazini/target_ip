@@ -8,11 +8,15 @@ from sqlalchemy import pool
 from alembic import context
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, "env_file"))
+load_dotenv(os.path.join(BASE_DIR, ".env.sample"))
 
 config = context.config
+db_url = os.environ["DATABASE_URL"]
 
-config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+config.set_main_option("sqlalchemy.url", db_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
