@@ -1,5 +1,7 @@
 import requests
 
+from domain.services.ip_crud.exception import IpStackError
+
 
 class IpStack:
     __access_key = "11b99a9b1c0a3b3ac981cca0b896697f"
@@ -18,4 +20,7 @@ class IpStack:
             url=api_endpoint,
         )
 
-        return response.json()
+        if response.ok:
+            return response.json()
+
+        raise IpStackError("Could not get valid response from IpStack API. Probably server is down.")
