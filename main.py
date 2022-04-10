@@ -16,6 +16,8 @@ app = FastAPI()
 
 origins = [
     "https://target-ip.herokuapp.com/",
+    "http://127.0.0.1/",
+    "http://0.0.0.0/",
 ]
 
 app.add_middleware(
