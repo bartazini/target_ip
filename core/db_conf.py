@@ -8,7 +8,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 load_dotenv(os.path.join(BASE_DIR, ".env.sample"))
 
-SQLALCHEMY_DATABASE_URL = os.environ["DATABASE_URL"]
+db_url = os.environ["DATABASE_URL"]
+
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+SQLALCHEMY_DATABASE_URL = db_url
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
