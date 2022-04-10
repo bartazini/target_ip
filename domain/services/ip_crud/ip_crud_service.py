@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from fastapi.responses import JSONResponse
 
 from core.models import Address
+from domain.services.ip_crud.exception import IpStackError
 from ip_stack.IpStack import IpStack
 
 
@@ -24,9 +25,13 @@ async def get_ip_location(ip_address: str, db: Session) -> JSONResponse:
     try:
         ip_address_location_details = await _get_ip_address_geolocation_details(ip_address=ip_address)
 
-    except Exception as e:
+    except IpStackError as e:
         return JSONResponse(
-            content={"status": f"Could not get geolocation data for: {ip_address} due to: {e.__class__.__name__}"}
+            content=
+            {
+                "status": f"Could not get geolocation data for: {ip_address} due to: "
+                          f"{str(e)}"
+            }
         )
 
     return JSONResponse(content=ip_address_location_details, status_code=200)
